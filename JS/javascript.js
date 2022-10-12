@@ -1,72 +1,86 @@
 
+class Personaje {
+    constructor(nombre, poder, nivel, origen, invocacion, valoracion, id) {
+        this.nombre = nombre;
+        this.poder = poder;
+        this.nivel = nivel;
+        this.origen = origen;
+        this.invocacion = invocacion;
+        this.valoracion = parseInt(valoracion);
+        this.id = id;
 
-
-function saludar(nombre, momento){ //dentro del parentesis se agrega el parametro para la funcion
-    
-    alert ("buenas, como estas "   + nombre);
-}  
-
-
-
-
-
-
-//llamado de la funciom
-let nombreUsuario = prompt("ingresa tu nombre");
-saludar(nombreUsuario)
-
-
-
-let savedPass = "naruto";
-
-for (let i = 0; i < 3; i++){
-    let userPass = prompt("personaje que evangeliza");
-    if(userPass===savedPass){
-        alert("adivinaste perro");
-        break;
-    }
-    alert("no, no es. otro intento");
-
-    
-    
-}
-alert("otra pregunta")
-let personajeCorrecto = "gaara";
-let continuar = true;
-let personajeUsuario = prompt("que personaje es el Jinchuuriki del shukaku?");
-
-while(continuar){
-    if(personajeCorrecto===personajeUsuario){
-        alert("esaa, parece que sos un fan");
-        continuar =false;
-        break;
     }
 
-    alert("personaje incorrecto");
-    personajeUsuario = prompt("Jinchuuriki del shukaku");
+    asignarId(array) {
+        this.id = array.length;
+    }
+
+    valorar(valoracion) {
+        this.valoracion = parseInt(valoracion);
+    }
+
+}
+
+const personajes = [
+    new Personaje ("Naruto", "rasengan", "kage", "konoha", "gamakichi", 10, 1),
+    new Personaje ("sakura", "curacion", "chunin", "konoha", "katsuyu", 5, 3),
+    new Personaje ("kakashi", "sharingan", "jonin", "konoha", "pakkun", 7, 4),
+    new Personaje ("sarutobi", "sello consumidor del demonio", "kage", "konoha", "ennma", 1, 5,),
+    new Personaje ("itachi", "mangekyou sharingan", "Dios", "desertor de konoha", "cuervos", 10, 6),
+    new Personaje ("gaara", "ataud de arena", "kage", "sunagakure", "shukaku", 10, 7)
+
+]
+
+console.log(Personaje)
+
+
+
+//ordenando el array
+
+
+let criterio = prompt("elegi un criterio deseado: \n1 - personaje (A a Z) \n2 - personaje (Z a A) \n3 - mejor a peor puntuado");
+
+function ordenar(criterio, array) {
+
+    let arrayOrdenado = array.slice(0);
+
+    switch (criterio) {
+        case "1":
+            let nombreAscendente = arrayOrdenado.sort((a, b) => a.nombre.localeCompare(b.nombre));
+            return nombreAscendente;
+
+        case "2":
+            let nombreDescendente = arrayOrdenado.sort((a, b) => b.nombre.localeCompare(a.nombre));
+            return nombreDescendente;
+
+        case "3":
+            return arrayOrdenado.sort((a, b) => b.valoracion - a.valoracion);
+
+
+
+
+        default:
+            alert("no es un criterio valido");
+            break;
+    }
 }
 
 
-alert ("siguiente adivinanza") 
-let opcion = prompt("Que poder es caracteristico de Naruto: \n1- chidori \n2 amaterasu \n3- rasengan \n4 bola de fuego");
-switch (opcion){
-    case "1":
-        alert("Este es de Sasuke");
-        break;
-    case "2":
-        alert("No, no es");
-        break;
-    case "3":
-        alert("bien ahi");
-        break;
-    case "4":
-        alert("casi pero no");
-        break
-    
-    default:
-        alert("invalido tonto")
-} 
+//mostrando el alert
 
+function crearStringresultado(array) {
+    let info = "";
 
+    array.forEach(element => {
+
+        info += "personaje: " + element.Personaje + "\nnivel: " + element.nivel + "\npoder:" + element.poder + "\norigen: " + element.origen + "\nvaloracion: " + element.valoracion + "\npuntos. \n\n"
+
+    });
+
+    return info;
+
+}
+
+alert(crearStringresultado(ordenar(criterio, personajes)))
 
 
